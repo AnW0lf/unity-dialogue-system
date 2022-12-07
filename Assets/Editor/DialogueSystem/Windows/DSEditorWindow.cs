@@ -5,12 +5,12 @@ using UnityEngine.UIElements;
 
 namespace DS.Windows
 {
-    using System;
     using Utilities;
 
     public class DSEditorWindow : EditorWindow
     {
         private DSGraphView graphView;
+        private VisualElement variablesPanel; 
 
         private readonly string defaultFileName = "DialoguesFileName";
 
@@ -27,9 +27,29 @@ namespace DS.Windows
         private void OnEnable()
         {
             AddGraphView();
+            AddVariablesPanel();
             AddToolbar();
 
             AddStyles();
+        }
+
+        private void AddVariablesPanel()
+        {
+            variablesPanel = new VisualElement();
+
+            Label label = new Label("Variables:");
+            variablesPanel.Add(label);
+
+            Button addBooleanButton = new Button() { text = "Add Boolean" };
+            variablesPanel.Add(addBooleanButton);
+
+            Button addIntegerButton = new Button() { text = "Add Integer" };
+            variablesPanel.Add(addIntegerButton);
+
+            Button addFloatButton = new Button() { text = "Add Float" };
+            variablesPanel.Add(addFloatButton);
+
+            rootVisualElement.Add(variablesPanel);
         }
 
         private void AddGraphView()
